@@ -1,0 +1,362 @@
+/* --- ESTILOS GENERALES Y ESTRUCTURA DE LA PÁGINA --- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  height: 100vh;
+  /* background: #222; */
+  /* overflow: hidden; */
+}
+
+/* Modificamos el cuerpo para acomodar la sidebar */
+body {
+  min-height: 100vh;
+  background: #2f363e; /* Cambiado para que coincida con la sidebar */
+  display: flex;
+}
+
+#inicio {
+  position: relative;
+  width: calc(100% - 100px);
+  /* height: 100%; */
+  display: flex;
+
+  min-height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 100px; /* Para dejar espacio a la sidebar */
+  overflow: hidden;
+}
+
+/* --- ESTILOS PARA EL FONDO DE CUADROS --- */
+.container {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+  background: rgba(45, 45, 45, 1);
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+  cursor: default;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: var(--y);
+  left: var(--x);
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    circle,
+    var(--clr, rgba(255, 255, 255, 0.5)),
+    transparent 70%
+  );
+  width: 100px;
+  height: 100px;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  background: rgba(45, 45, 45, 0.9);
+  border-radius: 5px;
+}
+
+.main-wrapper {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px; /* límite de ancho para no verse demasiado estirado */
+  margin: 0 auto;
+
+  pointer-events: none;
+  height: 100%;
+}
+
+/* --- ESTILOS PARA EL CONTENIDO PRINCIPAL --- */
+#main {
+  flex: 1;
+  color: white;
+  text-align: left;
+  pointer-events: none; /* deja que el hover del fondo funcione */
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#main .text-main {
+  margin-bottom: 25px;
+  /* display: flex; */
+  max-width: 600px;
+  /* justify-content: center;
+  align-items: center;
+  flex-direction: column; */
+}
+
+#main .social-links {
+  pointer-events: none;
+}
+#main .social-links * {
+  pointer-events: auto; /* los links sí son interactivos */
+}
+
+/* IMAGEN */
+.profile-img {
+  flex: 0.8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.profile-img .bg-img {
+  position: absolute;
+  width: 100%; /* que ocupe todo el ancho */
+  max-width: 500px;
+  height: auto;
+  border-radius: 20px; /* opcional para que no quede cuadrada */
+  animation: anmateImage 8s ease-in-out infinite;
+  z-index: 0;
+}
+
+.profile-img .men {
+  position: absolute;
+  width: 80%; /* más pequeña y escalable */
+  max-width: 400px;
+  height: auto;
+  /* bottom: 0; */
+  left: 50%;
+  transform: translateX(-50%);
+
+  border-radius: 20px; /* opcional para que no quede cuadrada */
+  animation: anmateMen 8s ease-in-out infinite;
+  z-index: 1;
+  border-radius: 20% 20% 40% 10% / 20% 10% 10% 30%;
+}
+
+@keyframes anmateImage {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes anmateMen {
+  0% {
+    border-radius: 20% 20% 40% 10% / 20% 10% 10% 30%;
+  }
+  100% {
+    border-radius: 20% 20% 40% 10% / 20% 10% 10% 30%;
+    transform: translateX(-50%) translateX(0);
+  }
+  50% {
+    transform: translateX(-50%) translateX(-20px);
+    border-radius: 40% 15% 20% 30% / 30% 30% 15% 20%;
+  }
+}
+
+.text-main h3 {
+  font-size: 28px; /* Un tamaño claro y legible */
+  font-weight: 400;
+}
+
+.text-main h1 {
+  font-size: 60px; /* Tu nombre debe resaltar */
+  font-weight: 700;
+  margin: 0 0 10px 0; /* Espacio abajo */
+  line-height: 1.2;
+}
+
+.text-main p {
+  font-size: 20px;
+  opacity: 0.8;
+}
+
+.text-main h3 span {
+  color: #6c63ff;
+  font-weight: 700;
+}
+.text-main h3 span.highlight {
+  color: #6c63ff; /* tu color principal */
+  font-weight: 700;
+}
+
+.text-main p {
+  font-size: 18px; /* Más legible */
+  line-height: 1.6; /* Mejor lectura */
+  width: 100%;
+  margin: 15px 0 20px 0;
+}
+
+/* --- ESTILOS PARA LOS CUBOS FLOTANTES --- */
+.social-links {
+  position: relative;
+  display: flex;
+  gap: 50px;
+  z-index: 20;
+  /* margin-top: 15px; */
+  padding: 0 20px;
+}
+
+.social-links li {
+  list-style: none;
+}
+
+.social-links li a {
+  position: relative;
+  display: block;
+  text-decoration: none;
+  transition: 0.5s;
+  transform: rotate(-30deg) skew(25deg);
+  box-shadow: -36px 50px 24px rgba(0, 0, 0, 0.2);
+}
+
+.social-links li a:hover {
+  transform: rotate(-30deg) skew(25deg) translate(10px, -10px);
+}
+
+.social-links li a span {
+  display: block;
+  width: 50px;
+  height: 50px;
+  /* background: rgba(45, 45, 45, 1); */
+  background: #2f363e;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s;
+}
+
+.social-links li a span:nth-child(2) {
+  position: absolute;
+  top: 25px;
+  left: -45px;
+  width: 50px;
+  height: 40px;
+  transform: rotate(0deg) skewY(-45deg) rotate(90deg);
+}
+
+.social-links li a span:nth-child(3) {
+  position: absolute;
+  bottom: -40px;
+  left: -20px;
+  width: 100%;
+  height: 40px;
+  transform: rotate(0deg) skewX(-45deg);
+}
+
+.social-links li a span i {
+  color: #a6a6a6;
+  font-size: 1.5rem;
+  transition: 0.5s;
+}
+
+.social-links li:hover i {
+  color: #fff;
+}
+
+.social-links li:hover span {
+  background: var(--clr);
+  box-shadow: 0 0 5px var(--clr), 0 0 10px var(--clr);
+}
+
+/* --- MEDIA QUERIES PARA RESPONSIVIDAD --- */
+@media (max-width: 768px) {
+  .profile-img {
+    height: auto;
+    padding: 20px 0;
+  }
+
+  .profile-img .bg-img {
+    width: 90%;
+    max-width: 300px;
+  }
+
+  .profile-img .men {
+    width: 70%;
+    max-width: 250px;
+  }
+
+  .main-wrapper {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+    gap: 80px;
+  }
+
+  /* #main {} */
+  /* text-align: center; */
+
+  .profile-img img {
+    max-width: 250px;
+  }
+  h1 {
+    font-size: 2rem;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+
+  .social-links {
+    gap: 40px;
+  }
+
+  .social-links li a span {
+    width: 40px;
+    height: 40px;
+  }
+
+  .social-links li a span:nth-child(2) {
+    top: 20px;
+    left: -35px;
+    width: 40px;
+    height: 30px;
+  }
+
+  .social-links li a span:nth-child(3) {
+    bottom: -30px;
+    left: -15px;
+    height: 30px;
+  }
+
+  .social-links li a span i {
+    font-size: 1.2rem;
+  }
+  #inicio {
+    width: 100%;
+    margin-left: 0; /* Para dejar espacio a la sidebar */
+  }
+}
