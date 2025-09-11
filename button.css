@@ -1,0 +1,90 @@
+.btn-cv {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background: #27282c;
+}
+
+.btn-cv a {
+  position: relative;
+  background: #fff;
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 0.8em;
+  letter-spacing: 0.1em;
+  font-weight: 400;
+  padding: 10px 30px;
+  /* OPTIMIZACIÓN: Sé específico con las propiedades a transicionar */
+  transition: background 0.5s, color 0.5s, box-shadow 0.5s;
+  pointer-events: auto;
+  opacity: 0.8;
+  /* OPTIMIZACIÓN: Prepara al navegador para la animación del box-shadow */
+  will-change: box-shadow;
+}
+
+.btn-cv a:hover {
+  background: var(--cls);
+  color: var(--cls);
+  /* OPTIMIZACIÓN: Se eliminó "letter-spacing". Es la causa principal del lag. */
+  box-shadow: 0 0 35px var(--cls);
+}
+
+.btn-cv a::before {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  background: #27282c;
+}
+
+.btn-cv a span {
+  position: relative;
+  z-index: 1;
+}
+
+.btn-cv a i {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+/* --- OPTIMIZACIÓN EN PSEUDO-ELEMENTOS --- */
+.btn-cv a i::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 80%;
+  width: 10px;
+  height: 4px;
+  background: #27282c;
+  transform: translateX(-50%) skewX(325deg);
+  /* OPTIMIZACIÓN: Anima solo 'transform' y 'width', que es más eficiente que 'left' */
+  transition: transform 0.4s, width 0.4s;
+  /* OPTIMIZACIÓN: Prepara al navegador para la animación */
+  will-change: transform, width;
+}
+
+.btn-cv a:hover i::before {
+  width: 20px;
+  /* OPTIMIZACIÓN: En lugar de animar 'left', movemos el objeto con 'transform'.
+     El navegador maneja esto mucho mejor. */
+  transform: translateX(calc(-50% - 160%)) skewX(325deg);
+}
+
+.btn-cv a i::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 20%;
+  width: 10px;
+  height: 4px;
+  background: #27282c;
+  transform: translateX(-50%) skewX(325deg);
+  transition: transform 0.4s, width 0.4s;
+  will-change: transform, width;
+}
+
+.btn-cv a:hover i::after {
+  width: 20px;
+  transform: translateX(calc(-50% + 160%)) skewX(325deg);
+}

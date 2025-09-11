@@ -1,0 +1,264 @@
+/* --- ESTILOS PARA LA SIDEBAR (NAVIGATION) --- */
+.navigation {
+  position: fixed; /* Cambiado a fixed para que se mantenga en su lugar */
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 100%;
+  background: #2f363e;
+  box-shadow: 25px 25px 75px rgba(0, 0, 0, 0.25),
+    10px 10px 70px rgba(0, 0, 0, 0.25), inset 5px 5px 10px rgba(0, 0, 0, 0.5),
+    inset 5px 5px 20px rgba(255, 255, 255, 0.2),
+    inset -5px -5px 15px rgba(0, 0, 0, 0.25);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 50; /* Aseguramos que esté por encima del contenido principal */
+}
+
+.navigation #li-menu {
+  position: relative;
+  list-style: none;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  margin: 0 5px;
+}
+
+.navigation #li-menu::before {
+  content: '';
+  position: absolute;
+  top: calc(50% - 2.5px);
+  left: 20px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  transition: 0.5s;
+}
+
+.navigation #li-menu.active::before {
+  background: #0f0;
+  box-shadow: 0 0 5px #0f0, 0 0 10px #0f0, 0 0 20px #0f0, 0 0 30px #0f0,
+    0 0 40px #0f0, 0 0 50px #0f0;
+}
+
+.navigation #li-menu a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-decoration: none;
+}
+.navigation #li-menu a .icon {
+  position: absolute;
+  font-size: 1.7rem;
+  width: 80px;
+  height: 80px;
+  color: #aaa;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s;
+  transition-delay: 0.2s;
+}
+
+.navigation #li-menu:hover a .icon {
+  color: #29fd53;
+}
+
+.navigation #li-menu.active a .icon {
+  transform: translateX(45px);
+  background: #29fd53;
+  color: #fff;
+  box-shadow: 5px 5px 7px rgba(0, 0, 0, 0.25),
+    inset 2px 2px 3px rgba(255, 255, 255, 0.25),
+    inset -3px -3px 5px rgba(0, 0, 0, 0.5);
+  transition-delay: 0.2s;
+}
+
+.navigation #li-menu a .icon::before {
+  content: '';
+  position: absolute;
+  inset: 10px;
+  background: #2f363e;
+  border-radius: 50%;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5),
+    inset 2px 2px 3px rgba(255, 255, 255, 0.25),
+    inset -3px -3px 5px rgba(0, 0, 0, 0.5);
+  transform: scale(0);
+  transition: 0.5s;
+}
+
+.navigation #li-menu.active a .icon::before {
+  transform: scale(1);
+}
+
+.navigation #li-menu a .text {
+  position: absolute;
+  left: 80px;
+  font-size: 1.25rem;
+  background: #29fd53;
+  color: #2f363e;
+  padding: 4px 15px;
+  border-radius: 15px;
+  box-shadow: 5px 5px 7px rgba(0, 0, 0, 0.25),
+    inset -3px -3px 5px rgba(0, 0, 0, 0.5);
+  visibility: hidden;
+  transition: 0.3s;
+}
+
+.navigation #li-menu a .text::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -4px;
+  transform: translateY(-50%) rotate(45deg);
+  width: 10px;
+  height: 10px;
+  background: #29fd53;
+}
+
+.navigation #li-menu:hover a .text {
+  left: 100px;
+  visibility: visible;
+  opacity: 1;
+  transition: 0.3s;
+}
+
+.navigation #li-menu.active:hover a .text {
+  left: 140px;
+  visibility: visible;
+  opacity: 1;
+  transition: 0.3s;
+}
+
+.hamburger-menu,
+.close-btn {
+  display: none;
+}
+
+.text-h3-main {
+  height: auto;
+}
+
+/* Se aplicará en pantallas de 768px de ancho o menos */
+@media (max-width: 768px) {
+  /* 1. Mostramos el botón de hamburguesa y lo posicionamos */
+  .hamburger-menu {
+    display: flex;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-size: 2.5rem;
+    color: #fff;
+    z-index: 99; /* Por debajo del menú abierto */
+    cursor: pointer;
+    background: #2f363e;
+    padding: 5px 10px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+  }
+  .navigation.open .close-btn {
+    width: auto;
+  }
+
+  .text-main p {
+    margin: 0 0 20px 0;
+  }
+
+  /* 2. Ocultamos el sidebar original y lo preparamos para deslizarse */
+  .navigation {
+    /* Lo posicionamos fuera de la pantalla a la izquierda */
+    left: -100%;
+    width: 80%; /* Ocupará el 80% del ancho al abrirse */
+    max-width: 240px; /* Un ancho máximo */
+    height: 100vh; /* Toda la altura */
+    top: 0;
+
+    /* Ajustes para el menú vertical */
+    flex-direction: column;
+    justify-content: flex-start; /* Alineamos items al inicio */
+    align-items: flex-start;
+    padding-top: 50px; /* Espacio para el botón de cierre */
+    transition: left 0.4s ease-in-out; /* Animación de deslizamiento */
+  }
+
+  /* 3. Creamos una clase 'open' que JavaScript activará */
+  .navigation.open {
+    left: 0; /* Al tener la clase 'open', el menú se desliza a la vista */
+  }
+  .navigation.open #li-menu {
+    margin: 0;
+  }
+
+  /* 4. Mostramos el botón de cierre dentro del menú */
+  .close-btn {
+    display: flex;
+    position: absolute;
+    top: 0;
+    right: -2px;
+    font-size: 2.5rem;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  /* 5. Ocultamos los íconos y el punto indicador */
+  .navigation #li-menu a .icon,
+  .navigation #li-menu::before {
+    display: none;
+  }
+
+  .navigation #li-menu {
+    width: 100%; /* Cada item ocupa todo el ancho del menú */
+    height: auto;
+    justify-content: flex-start; /* Alineamos a la izquierda */
+  }
+
+  /* 6. Hacemos que los textos sean visibles y ocupen todo el ancho */
+  .navigation #li-menu a .text {
+    visibility: visible;
+    opacity: 1;
+    position: static; /* Quitamos posicionamiento absoluto */
+    background: none;
+    box-shadow: none;
+    color: #eee;
+    font-size: 1.2rem;
+    padding: 15px 30px;
+    border-radius: 0;
+    width: 100%;
+    transition: 0.3s;
+  }
+  .navigation #li-menu a {
+    width: 100%;
+  }
+
+  .text-main h3 {
+    font-size: 24px;
+  }
+
+  .text-h3-main {
+    height: 72px;
+  }
+  .navigation #li-menu a .text::before {
+    display: none; /* Ocultamos la flechita */
+  }
+
+  /* 7. Estilo para el link activo y hover */
+  .navigation #li-menu:hover a .text,
+  .navigation #li-menu.active a .text {
+    background: #29fd53;
+    color: #2f363e;
+  }
+
+  /* 8. Reseteamos los estilos de 'hover' y 'active' del modo escritorio */
+  .navigation #li-menu.active a .icon,
+  .navigation #li-menu:hover a .text,
+  .navigation #li-menu.active:hover a .text {
+    transform: none;
+    left: auto;
+  }
+}

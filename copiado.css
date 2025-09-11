@@ -1,0 +1,63 @@
+.social-links .copiar-correo-li {
+  position: relative; /* Necesario para posicionar la etiqueta */
+}
+.etiqueta-copiado {
+  position: absolute; /* Posicionamiento absoluto respecto al 'li' */
+  bottom: 110%; /* La colocamos encima del ícono */
+  left: 50%;
+  transform: translateX(-50%); /* La centramos horizontalmente */
+
+  background-color: #28a745 !important;
+
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-family: sans-serif;
+  white-space: nowrap; /* Evita que el texto se parta en dos líneas */
+
+  /* Para la animación de aparecer y desaparecer */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+/* Clase que añadiremos con JavaScript para mostrar la etiqueta */
+.etiqueta-copiado.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* --- TOOLTIP PARA HOVER --- */
+
+/* La etiqueta para el hover (inicialmente oculta) */
+.etiqueta-hover {
+  position: absolute;
+  bottom: 110%; /* Lo posiciona encima del ícono */
+  left: 50%;
+  transform: translateX(-50%);
+
+  background-color: #323232; /* Color oscuro, típico de tooltips */
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-family: sans-serif;
+  white-space: nowrap;
+
+  /* Efecto de transición suave */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+  pointer-events: none;
+}
+
+/* --- LÓGICA DE APARICIÓN --- */
+
+/* Cuando el cursor está sobre el enlace (a#copiar-correo),
+   buscamos el hermano adyacente (+) con la clase .etiqueta-hover y lo hacemos visible */
+a#copiar-correo:hover + .etiqueta-hover {
+  opacity: 1;
+  visibility: visible;
+}
